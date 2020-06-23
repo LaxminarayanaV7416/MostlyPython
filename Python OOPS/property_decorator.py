@@ -1,4 +1,6 @@
-
+# Lets see how property decorators play crucial role while using oops in python
+# we have access to setter, getter and deleter methods using oops
+# lets go deep and understand about them with proper examples
 
 class EmployeeWithProperty:
 
