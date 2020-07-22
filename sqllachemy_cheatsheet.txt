@@ -1,0 +1,100 @@
+For complete guide visit
+https://www.pythonsheets.com/notes/python-sqlalchemy.html
+Note - for latest updates visit sqlalchemy website, the above link few imports are outdated.
+
+
+####################################################################################
+                                SQLALCHEMY CORE
+####################################################################################
+
+from sqlalchemy import create_engine, Table, Column, Integer, String, MetaData, ForeignKey, JSON
+from sqlalchemy.sql import select, and_, or_, not_, text, funcs
+
+# engine String
+' dialect+driver://username:password@host:port/database '
+
+# Note => we can either create and match all columns of table in database or just we can try use autoload feature
+### trying best to match all the features 
+table_name = Table('table_name', meta,
+            Column('column1', String, nullable=True),
+            Column('column_2', Integer, primary_key=True),
+            Column('column_3', Integer, ForeignKey('table_name_2.column_name)))
+### Tryin' to match use autoload feature of database
+table_name = Table('table_name', meta, autoload=True, autoload_with = engine)
+
+# lets create engine and execute it
+engine = create_engine('database_uri')
+conn = engine.connect()
+conn.execute(query_varibles) # returns the result object which is iterator
+
+
+# MetaData
+meta = MetaData() # use this while creatting table
+meta.create_all(engine) # create all the tables 
+for table_name in meta.sorted_tables:
+    print(table_name) # to print all the tables available in database we are currently connected to 
+
+# table instance variables list
+table_name.create(engine,checkfirst=True) # to create a single table
+table_name.drop(engine, checkfirst=False) # to drop a table
+table_name.columns.column_name
+table_name.c.column_name
+table_name.join(another_table_name)
+
+# lets see about select 
+select().where()
+select().select_from()
+select().group_by()
+select().order_by()
+
+# for alias use TABLE_NAME.alias()
+
+# lets see how to insert
+conn.execute(table_name.insert().values(column1=value1))
+conn.execute(table_name.insert(),{'column1':'value1',..}) # for single insert
+conn.execute(table_name.insert(),[{'column1':'value1',..},{'column1':'value1',..},..]) # for multiple inserts at once
+
+#lets see how to do updates
+conn.execute(table_name.update().where().values())
+
+#lets see how to delete 
+conn.execute(table_name.delete().where())
+
+# Sql Datatypes
+VARCHAR
+CHAR
+BIGINT
+BINARY
+JSON
+BLOB
+ARRAY
+INTEGER 
+NUMERIC
+
+# sql functions
+# NOTE we can create any name with func. and that functionality should be available in database
+func.max()
+func.min()
+func.current_timestamp()
+func.now()
+func.sum()
+func.count()
+
+
+####################################################################################
+                                SQLALCHEMY object Relationship Mapping (ORM)
+####################################################################################
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine, Column, Integer, String
+
+Base = declarative_base()
+
+class Table_name(Base):
+    __tablname__ = 'table_name_in_db'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    fullname = Column(String)
+
+    def __repr__(self):
+        return f'table_name_in_db with id {self.id} and name {self.name}'
