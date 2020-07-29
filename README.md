@@ -16,6 +16,8 @@
 * File formats
   * python csv modules
   * python confiparser module
+  * Python xml Module
+  * Python Yaml module
 * generic operating system services
   * python io module
   * python argparse module
