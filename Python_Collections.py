@@ -18,7 +18,8 @@ print(count) # outputs as dictionary output is Counter({'b': 7, 'a': 3, 'x': 3, 
 print(count.most_common(3)) #outputs the most common elements as list for eg. [('a', 5), ('b', 4), ('c', 3)]
 print(list(count.elements())) #to see all the elements and by default it gives iterables so am converting it to list
 
-
+#############################################################
+#############################################################
 
 # Now lets talk about the namedtuple, its a lightweight object type similar to struct
 # lets make a named tuple its quite simple 
@@ -36,6 +37,8 @@ print(tup2)
 print(tup2._asdict()) #this will convert to ordereddict object and we can use it as noraml dictionary as well.
 
 
+#############################################################
+#############################################################
 
 
 # Now lets see about the OrderedDict 
@@ -46,7 +49,8 @@ ord_dict['world']=20419
 # dictionary remebers the order 
 print(ord_dict.keys())
 
-
+#############################################################
+#############################################################
 
 # Now lets talk about defaultdict
 # default dict is used to when we want to set default value when key doesnot exists (to avoid KeyError)
@@ -56,6 +60,8 @@ def_dict['world']=1235
 print(def_dict['world'],def_dict['lucky']) # as key lucky doesnt exists it prints empty list
 
 
+#############################################################
+#############################################################
 
 # now lets learn about deque -> its nothing but the listwith some extra benifits of adding to left most place , removing left etc
 deq = clct.deque([1,2,3]) # converted a normal list to deque for extra benfits
@@ -63,3 +69,5 @@ deq.appendleft(4) #appends element 4 in the first place that is left most positi
 deq.extendleft([5,6]) # extends left but we will ass the last element as first
 deq.popleft() #removes the first element from the list
 
+#############################################################
+#############################################################
