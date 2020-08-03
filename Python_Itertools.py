@@ -62,3 +62,112 @@ print(squares)
 #############################################################
 #############################################################
 
+# map is a builtin method in python which will consume function and many iterables so that every iterables value per once
+# will be mapped to the function and output is saved as iterator.
+
+# what if we have an iterable which has tuple of pairs for instance [(1,2,3),(4,5,6)] =, we can use this with map 
+# as well as starmap from itertools.
+
+count = itertools.repeat(3)
+x = [i for i in zip(range(1,11),count)]
+y = list(itertools.starmap(pow, x))
+print(y)
+
+#############################################################
+#############################################################
+
+# Lets talk about permutations in itertools
+# little intriduction about permutations all different ways to group item where the order DOES matter.
+
+letters = ['a','b','c','d']
+numbers = [0,1,2,3]
+names = ['lucky','lax','laxminarayana']
+
+result = itertools.permutations(letters,2)
+
+#remember the Order do matter!!
+for i in result:
+    print(i) 
+print('-------------')    
+
+#############################################################
+#############################################################
+
+# Lets talk about Combinations in itertools
+# little intriduction about Combinations all different ways to group item where the order DOES NOT matter.
+
+letters = ['a','b','c','d']
+numbers = [0,1,2,3]
+names = ['lucky','lax','laxminarayana']
+
+result = itertools.combinations(letters,2)
+
+#remember the Order do not matter!!
+for i in result:
+    print(i) 
+print('-------------')    
+
+
+# there is one more way to allow repeat values in combinations that is combinations_with_replacement
+result = itertools.combinations_with_replacement(letters,4)
+
+#remember the Order do not matter!!
+for i in result:
+    print(i) 
+print('-------------')    
+#############################################################
+#############################################################
+
+# lets see the cartisean product of the iterables which will be able to get the same kinda types for
+# isntance we want a number of 4 and all possible permutations where repeating a number for multiple times also do matter.
+# 1111,1112, etc.,
+
+letters = ['a','b','c','d']
+numbers = [0,1,2,3]
+names = ['lucky','lax','laxminarayana']
+
+result = itertools.product(numbers,repeat=4)
+
+for i in result:
+    print(i)
+print('-------------')    
+
+#############################################################
+#############################################################
+
+# lets talk about chain method in the itertools
+# consider the situation where we want to extend two or more lists together and make one list.
+# where this activity wouldnt be memory efficient, so we have chain to do so
+
+letters = ['a','b','c','d']
+numbers = [0,1,2,3]
+
+extended_list = itertools.chain(letters,numbers)
+
+for i in extended_list:
+    print(i)
+
+#############################################################
+#############################################################
+
+# Lets see the slicing of iterators
+# we can use itertools method like islice -> which means iterator slice.
+# lets the use case here
+# when we try to read a file it will be as TextIOWrapper which is an object and iterator by itself, but when we apply
+# TextIOWrapper based methods like readlines which will convert the IOWrapper to list which may overload the memory.
+
+# a test snippet to avoid the readlines method.
+'''
+with open('README.md', mode='r', encoding='utf-8') as file_opened:
+    for line in file_opened:
+        print(line)
+'''
+
+# now when we want to slice the iterator direclty we can do that with islice
+with open('README.md', mode='r', encoding='utf-8') as file_opened:
+    for line in itertools.islice(file_opened,1,10,3): # syntax is islice(iterator, stop) or islice(iterator,start,stop,step)
+        print(line)
+
+#############################################################
+#############################################################
+
